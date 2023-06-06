@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useReducer } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { searchForShows, searchForPeople } from "./../api/tvmaze";
 import SearchForm from "../components/SearchForm";
