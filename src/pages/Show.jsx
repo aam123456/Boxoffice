@@ -1,4 +1,4 @@
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { getShowById } from "../api/tvmaze";
 import ShowMainData from "../components/Shows/ShowMainData";
@@ -14,8 +14,6 @@ const Show = () => {
     queryFn: () => getShowById(showId),
     refetchOnWindowFocus: false,
   });
-
-  
 
   // const {showData,showError}= useShowById(showId)
   if (showError) {
@@ -33,6 +31,7 @@ const Show = () => {
           rating={showData.rating}
           summary={showData.summary}
           genres={showData.genres}
+          someprop
         />
         <div>
           <h2>Details</h2>

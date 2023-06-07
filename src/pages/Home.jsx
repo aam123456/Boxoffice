@@ -1,9 +1,11 @@
-import { useState,useReducer } from "react";
+import { useState} from "react";
 import { useQuery } from "@tanstack/react-query";
 import { searchForShows, searchForPeople } from "./../api/tvmaze";
 import SearchForm from "../components/SearchForm";
 import ShowGrid from "../components/Shows/ShowGrid";
 import ActorsGrid from "../components/Actors/ActordGrid";
+
+
 
 const Home = () => {
   const [filter, setFilter] = useState(null);
@@ -15,7 +17,7 @@ const Home = () => {
         ? searchForShows(filter.q)
         : searchForPeople(filter.q),
     enabled: !!filter,
-    refetchOnWindowFocus:false,
+    refetchOnWindowFocus: false,
   });
 
   const onSearch = async ({ q, searchOption }) => {
@@ -48,16 +50,6 @@ const Home = () => {
   );
 };
 export default Home;
-
-
-
-
-
-
-
-
-
-
 
 // const [apiData, setApiData] = useState(null);
 // const [apiDataError, setApiDataError] = useState(null);
