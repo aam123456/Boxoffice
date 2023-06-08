@@ -5,6 +5,8 @@ import ShowMainData from "../components/Shows/ShowMainData";
 import Details from "../components/Shows/Details";
 import Seasons from "../components/Shows/Seasons";
 import Cast from "../components/Shows/Cast";
+import styled from "styled-components";
+import { TextCenter } from "../components/common/TextCenter";
 
 const Show = () => {
   const { showId } = useParams();
@@ -17,13 +19,14 @@ const Show = () => {
 
   // const {showData,showError}= useShowById(showId)
   if (showError) {
-    return <div> We have an error:{showError.message}</div>;
+    return <TextCenter> We have an error:{showError.message}</TextCenter>;
   }
   if (showData) {
     return (
-      <div>
-        {/* <button type="button" onClick={onGoBack}>Go back to home</button> */}
-        <Link to="/">Go back Home</Link>
+      <ShowPageWrapper>
+        <BackHomeWrapper>
+          <Link to="/">Go back Home</Link>
+        </BackHomeWrapper>
 
         <ShowMainData
           image={showData.image}
@@ -33,46 +36,59 @@ const Show = () => {
           genres={showData.genres}
           someprop
         />
-        <div>
+        <InfoBlock>
           <h2>Details</h2>
           <Details
             status={showData.status}
             premiered={showData.premiered}
             network={showData.network}
           />
-        </div>
+        </InfoBlock>
 
-        <div>
+        <InfoBlock>
           <h2>Seasons</h2>
           <Seasons seasons={showData._embedded.seasons} />
-        </div>
-        <div>
+        </InfoBlock>
+        <InfoBlock>
           <h2>Cast</h2>
           <Cast cast={showData._embedded.cast} />
-        </div>
-      </div>
+        </InfoBlock>
+      </ShowPageWrapper>
     );
   }
 
-  return <div>Show page for {showId}</div>;
+  return <TextCenter>Show page for {showId}</TextCenter>;
 };
 export default Show;
 
-// const useShowById=(showId)=>{
+const BackHomeWrapper = styled.div`
+  margin-bottom: 30px;
+  text-align: left;
+  a {
+    padding: 10px;
+    color: ${({ theme }) => theme.mainColors.dark};
+    text-decoration: none;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+`;
 
-//   const [showData,setShowData]=useState(null)
-//   const [showError,setShowError]=useState(null)
+const ShowPageWrapper = styled.div`
+  margin: auto;
+  @media only screen and (min-width: 768px) {
+    max-width: 700px;
+  }
+  @media only screen and (min-width: 992px) {
+    max-width: 900px;
+  }
+`;
 
-//   useEffect(() => {
-//     async function fetchData() {
-//         try {
-//             const data = await getShowById(showId);
-//             setShowData(data)
-//         } catch (err) {
-//             setShowError(err)
-//         }
-//     }
-//     fetchData()
-//   }, [showId]);
-//   return {showData,showError}
-// }
+const InfoBlock = styled.div`
+  margin-bottom: 40px;
+  h2 {
+    margin: 0;
+    margin-bottom: 30px;
+    font-size: 22px;
+  }
+`;

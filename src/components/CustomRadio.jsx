@@ -3,7 +3,8 @@ const CustomRadio = ({ label, ...inputProps }) => {
   return (
     <StyledRadio>
       {label}
-      <input {...inputProps} type="radio" />
+      <input  {...inputProps} type="radio"></input>
+      <span/>
     </StyledRadio>
   );
 };
@@ -29,7 +30,7 @@ const StyledRadio = styled.label`
     left: 0;
     height: 16px;
     width: 16px;
-    background-color: #e00d0d;
+    background-color: #ffffff;
     border: 2px solid ${function ({ theme }) {
         return theme.mainColors.blue;
       }};
